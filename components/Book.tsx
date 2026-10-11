@@ -12,7 +12,7 @@ export default function Book() {
     if (!bookRef.current || !containerRef.current) return;
 
     const pageFlip = new PageFlip(bookRef.current, {
-      width: 600, // Yahan 400 se 600 kar diya taake gap khatam ho jaye
+      width: 1200, // Dono pages ki total width (600 + 600)
       height: 500,
       autoSize: false,
       showCover: true,
@@ -55,12 +55,12 @@ export default function Book() {
   return (
     <div ref={containerRef} className="w-full h-full flex items-center justify-center">
       
-      <div ref={bookRef}>
+      <div ref={bookRef} style={{ margin: 0, padding: 0 }}>
         {/* Front Cover */}
         <div
           className="book-page bg-transparent text-white"
           data-density="hard"
-          style={{ width: 600, height: 500 }}
+          style={{ width: 600, height: 500, margin: 0, padding: 0 }}
         >
           <Image
             src="/pages/front.png"
@@ -76,7 +76,7 @@ export default function Book() {
         {/* Page 1 */}
         <div
           className="book-page bg-transparent text-black"
-          style={{ width: 600, height: 500 }}
+          style={{ width: 600, height: 500, margin: 0, padding: 0 }}
         >
           <Image
             src="/pages/left.jpg"
@@ -147,7 +147,7 @@ export default function Book() {
         {/* Page 2 */}
         <div
           className="relative overflow-hidden book-page bg-transparent text-black"
-          style={{ width: 600, height: 500 }}
+          style={{ width: 600, height: 500, margin: 0, padding: 0 }}
         >
           <Image
             src="/pages/right.jpg"
@@ -226,7 +226,7 @@ export default function Book() {
         {/* Page 3 */}
         <div
           className="relative overflow-hidden book-page bg-transparent text-black"
-          style={{ width: 600, height: 500 }}
+          style={{ width: 600, height: 500, margin: 0, padding: 0 }}
         >
           <Image
             src="/pages/left.jpg"
@@ -313,7 +313,7 @@ export default function Book() {
         {/* Page 4 */}
         <div
           className="relative overflow-hidden book-page bg-transparent text-black"
-          style={{ width: 600, height: 500 }}
+          style={{ width: 600, height: 500, margin: 0, padding: 0 }}
         >
           <Image
             src="/pages/right.jpg"
@@ -384,7 +384,7 @@ export default function Book() {
         {/* Page 5 */}
         <div
           className="relative overflow-hidden book-page bg-transparent text-black"
-          style={{ width: 600, height: 500 }}
+          style={{ width: 600, height: 500, margin: 0, padding: 0 }}
         >
           <Image
             src="/pages/left.jpg"
@@ -471,7 +471,7 @@ export default function Book() {
         {/* Page 6 */}
         <div
           className="relative overflow-hidden book-page bg-transparent text-black"
-          style={{ width: 600, height: 500 }}
+          style={{ width: 600, height: 500, margin: 0, padding: 0 }}
         >
           <Image
             src="/pages/right.jpg"
@@ -535,7 +535,7 @@ export default function Book() {
         <div
           className="relative overflow-hidden book-page bg-transparent text-white"
           data-density="hard"
-          style={{ width: 600, height: 500 }}
+          style={{ width: 600, height: 500, margin: 0, padding: 0 }}
         >
           <Image
             src="/pages/back.png"
