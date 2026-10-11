@@ -12,8 +12,8 @@ export default function Book() {
     if (!bookRef.current || !containerRef.current) return;
 
     const pageFlip = new PageFlip(bookRef.current, {
-      width: 660,          // Perfect size (Original se bara, 800 se chota)
-      height: 550,         // Perfect size
+      width: 660,
+      height: 550,
       autoSize: false,
       showCover: true,
       drawShadow: true,
@@ -26,28 +26,41 @@ export default function Book() {
 
     pageFlip.loadFromHTML(bookRef.current.querySelectorAll(".book-page"));
 
-    let isFlipping = false; 
+    let isFlipping = false;
+
+    // Library ke event se pata chalega ke page palat raha hai ya nahi
+    pageFlip.on("changeState", (e: any) => {
+      if (e.data === "read") {
+        isFlipping = false; // Page palat chuka hai, ab scroll khol do
+      }
+    });
 
     const handleWheel = (e: WheelEvent) => {
-      if (isFlipping) return; 
+      // Agar page palat raha hai, to scroll ko bilkul rok do
+      if (isFlipping) {
+        e.preventDefault();
+        return;
+      }
 
       const currentPage = pageFlip.getCurrentPageIndex();
       const pageCount = pageFlip.getPageCount();
 
       if (e.deltaY > 0) {
+        // Neeche scroll (Scroll Down)
         if (currentPage < pageCount - 1) {
-          e.preventDefault(); 
-          isFlipping = true;
-          pageFlip.flipNext(); 
-          setTimeout(() => { isFlipping = false; }, 700); 
+          e.preventDefault();
+          isFlipping = true; // Lock laga do foran
+          pageFlip.flipNext();
         }
+        // Agar last page hai, to preventDefault nahi karenge, section neeche chala jayega
       } else if (e.deltaY < 0) {
+        // Upar scroll (Scroll Up)
         if (currentPage > 0) {
-          e.preventDefault(); 
-          isFlipping = true;
-          pageFlip.flipPrev(); 
-          setTimeout(() => { isFlipping = false; }, 700); 
+          e.preventDefault();
+          isFlipping = true; // Lock laga do foran
+          pageFlip.flipPrev();
         }
+        // Agar pehla page hai, to preventDefault nahi karenge, section upar chala jayega
       }
     };
 
@@ -61,7 +74,7 @@ export default function Book() {
   }, []);
 
   return (
-    // Yahan "py-20" add kiya hai taake top aur bottom par space bane
+    // "py-20" se top aur bottom par space bani hui hai
     <div ref={containerRef} className="w-full h-full flex items-center justify-center py-20">
       
       <div ref={bookRef}>
@@ -69,7 +82,7 @@ export default function Book() {
         <div
           className="book-page bg-blue-700 text-white"
           data-density="hard"
-          style={{ width: 330, height: 550 }} // Cover aadha width leta hai
+          style={{ width: 330, height: 550 }}
         >
           <Image
             src="/pages/front.png"
@@ -544,7 +557,7 @@ export default function Book() {
         <div
           className="relative overflow-hidden book-page bg-blue-700 text-white"
           data-density="hard"
-          style={{ width: 330, height: 550 }} // Cover aadha width leta hai
+          style={{ width: 330, height: 550 }}
         >
           <Image
             src="/pages/back.png"
