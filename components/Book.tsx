@@ -12,8 +12,8 @@ export default function Book() {
     if (!bookRef.current || !containerRef.current) return;
 
     const pageFlip = new PageFlip(bookRef.current, {
-      width: 600,          // Size barha diya
-      height: 800,         // Size barha diya
+      width: 660,          // Perfect size (Original se bara, 800 se chota)
+      height: 550,         // Perfect size
       autoSize: false,
       showCover: true,
       drawShadow: true,
@@ -26,29 +26,27 @@ export default function Book() {
 
     pageFlip.loadFromHTML(bookRef.current.querySelectorAll(".book-page"));
 
-    let isFlipping = false; // Lock lagane ke liye
+    let isFlipping = false; 
 
     const handleWheel = (e: WheelEvent) => {
-      if (isFlipping) return; // Agar page palat raha hai to ruk jao
+      if (isFlipping) return; 
 
       const currentPage = pageFlip.getCurrentPageIndex();
       const pageCount = pageFlip.getPageCount();
 
       if (e.deltaY > 0) {
-        // Neeche scroll (Scroll Down)
         if (currentPage < pageCount - 1) {
           e.preventDefault(); 
           isFlipping = true;
           pageFlip.flipNext(); 
-          setTimeout(() => { isFlipping = false; }, 700); // 700ms baad lock khulega
+          setTimeout(() => { isFlipping = false; }, 700); 
         }
       } else if (e.deltaY < 0) {
-        // Upar scroll (Scroll Up)
         if (currentPage > 0) {
           e.preventDefault(); 
           isFlipping = true;
           pageFlip.flipPrev(); 
-          setTimeout(() => { isFlipping = false; }, 700); // 700ms baad lock khulega
+          setTimeout(() => { isFlipping = false; }, 700); 
         }
       }
     };
@@ -63,14 +61,15 @@ export default function Book() {
   }, []);
 
   return (
-    <div ref={containerRef} className="w-full h-full flex items-center justify-center">
+    // Yahan "py-20" add kiya hai taake top aur bottom par space bane
+    <div ref={containerRef} className="w-full h-full flex items-center justify-center py-20">
       
       <div ref={bookRef}>
         {/* Front Cover */}
         <div
           className="book-page bg-blue-700 text-white"
           data-density="hard"
-          style={{ width: 300, height: 800 }}
+          style={{ width: 330, height: 550 }} // Cover aadha width leta hai
         >
           <Image
             src="/pages/front.png"
@@ -86,7 +85,7 @@ export default function Book() {
         {/* Page 1 */}
         <div
           className="book-page bg-amber-50 text-black"
-          style={{ width: 600, height: 800 }}
+          style={{ width: 660, height: 550 }}
         >
           <Image
             src="/pages/left.jpg"
@@ -157,7 +156,7 @@ export default function Book() {
         {/* Page 2 */}
         <div
           className="relative overflow-hidden book-page bg-amber-50 text-black"
-          style={{ width: 600, height: 800 }}
+          style={{ width: 660, height: 550 }}
         >
           <Image
             src="/pages/right.jpg"
@@ -236,7 +235,7 @@ export default function Book() {
         {/* Page 3 */}
         <div
           className="relative overflow-hidden book-page bg-amber-50 text-black"
-          style={{ width: 600, height: 800 }}
+          style={{ width: 660, height: 550 }}
         >
           <Image
             src="/pages/left.jpg"
@@ -323,7 +322,7 @@ export default function Book() {
         {/* Page 4 */}
         <div
           className="relative overflow-hidden book-page bg-amber-50 text-black"
-          style={{ width: 600, height: 800 }}
+          style={{ width: 660, height: 550 }}
         >
           <Image
             src="/pages/right.jpg"
@@ -394,7 +393,7 @@ export default function Book() {
         {/* Page 5 */}
         <div
           className="relative overflow-hidden book-page bg-amber-50 text-black"
-          style={{ width: 600, height: 800 }}
+          style={{ width: 660, height: 550 }}
         >
           <Image
             src="/pages/left.jpg"
@@ -481,7 +480,7 @@ export default function Book() {
         {/* Page 6 */}
         <div
           className="relative overflow-hidden book-page bg-amber-50 text-black"
-          style={{ width: 600, height: 800 }}
+          style={{ width: 660, height: 550 }}
         >
           <Image
             src="/pages/right.jpg"
@@ -545,7 +544,7 @@ export default function Book() {
         <div
           className="relative overflow-hidden book-page bg-blue-700 text-white"
           data-density="hard"
-          style={{ width: 600, height: 800 }}
+          style={{ width: 330, height: 550 }} // Cover aadha width leta hai
         >
           <Image
             src="/pages/back.png"
