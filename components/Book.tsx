@@ -6,13 +6,13 @@ import Image from "next/image";
 
 export default function Book() {
   const bookRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null); // Wrapper for scrolling
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!bookRef.current || !containerRef.current) return;
 
     const pageFlip = new PageFlip(bookRef.current, {
-      width: 400,
+      width: 600, // Yahan 400 se 600 kar diya taake gap khatam ho jaye
       height: 500,
       autoSize: false,
       showCover: true,
@@ -20,7 +20,6 @@ export default function Book() {
       maxShadowOpacity: 0.5,
       usePortrait: false,
       startPage: 0,
-      // Click functionality band karne ke liye
       clickEventForward: false,
       clickEventBackward: false,
     });
@@ -32,23 +31,18 @@ export default function Book() {
       const pageCount = pageFlip.getPageCount();
 
       if (e.deltaY > 0) {
-        // Neeche scroll (Scroll Down)
         if (currentPage < pageCount - 1) {
-          e.preventDefault(); // Page ko neeche janay se roko
-          pageFlip.flipNext(); // Agla page kholo
+          e.preventDefault(); 
+          pageFlip.flipNext(); 
         }
-        // Agar last page hai, to preventDefault nahi karenge, page neeche scroll ho jayega
       } else if (e.deltaY < 0) {
-        // Upar scroll (Scroll Up)
         if (currentPage > 0) {
-          e.preventDefault(); // Page ko upar janay se roko
-          pageFlip.flipPrev(); // Pichla page band karo
+          e.preventDefault(); 
+          pageFlip.flipPrev(); 
         }
-        // Agar pehla page hai, to preventDefault nahi karenge, page upar scroll ho jayega
       }
     };
 
-    // { passive: false } zaroori hai taake e.preventDefault() kaam kar sake
     const container = containerRef.current;
     container.addEventListener("wheel", handleWheel, { passive: false });
 
@@ -59,18 +53,16 @@ export default function Book() {
   }, []);
 
   return (
-    // Yeh wrapper add kiya hai taake wheel events capture ho sakein
     <div ref={containerRef} className="w-full h-full flex items-center justify-center">
       
       <div ref={bookRef}>
-        {/* Front Cover */}
+        {/* Front Cover - Blue color hata diya */}
         <div
-          className="book-page bg-blue-700 text-white"
+          className="book-page bg-transparent text-white"
           data-density="hard"
-          style={{ width: 200, height: 700 }}
+          style={{ width: 600, height: 500 }}
         >
           <Image
-            // src="/frontr.png"
             src="/pages/front.png"
             alt="Front Cover"
             fill
@@ -78,13 +70,12 @@ export default function Book() {
             draggable={false}
             className="object-contain scale-130 translate-x-3 pointer-events-none select-none"
           ></Image>
-
           <div className="flex h-full items-center justify-center text-5xl font-bold"></div>
         </div>
 
-        {/* Page 1 */}
+        {/* Page 1 - Cream color hata diya */}
         <div
-          className="  book-page bg-amber-50 text-black"
+          className="book-page bg-transparent text-black"
           style={{ width: 600, height: 500 }}
         >
           <Image
@@ -93,7 +84,7 @@ export default function Book() {
             fill
             priority
             draggable={false}
-            className="object-contain  pointer-events-none select-none"
+            className="object-contain pointer-events-none select-none"
           ></Image>
 
           <Image
@@ -102,7 +93,7 @@ export default function Book() {
             fill
             priority
             draggable={false}
-            className="object-contain  -rotate-12  -translate-x-34 -translate-y-33 scale-35   "
+            className="object-contain -rotate-12 -translate-x-34 -translate-y-33 scale-35"
           ></Image>
 
           <Image
@@ -111,7 +102,7 @@ export default function Book() {
             fill
             priority
             draggable={false}
-            className="object-contain   -translate-x-23 -translate-y-14 scale-78   "
+            className="object-contain -translate-x-23 -translate-y-14 scale-78"
           ></Image>
 
           <Image
@@ -120,7 +111,7 @@ export default function Book() {
             fill
             priority
             draggable={false}
-            className="object-contain   z-50 translate-x-20 translate-y-46 scale-55   "
+            className="object-contain z-50 translate-x-20 translate-y-46 scale-55"
           ></Image>
 
           <Image
@@ -129,7 +120,7 @@ export default function Book() {
             fill
             priority
             draggable={false}
-            className="object-contain scale-45 rotate-30  -translate-x-28 translate-y-32 "
+            className="object-contain scale-45 rotate-30 -translate-x-28 translate-y-32"
           ></Image>
 
           <Image
@@ -138,7 +129,7 @@ export default function Book() {
             fill
             priority
             draggable={false}
-            className="object-contain scale-33  rotate-10  translate-x-14 -translate-y-23 "
+            className="object-contain scale-33 rotate-10 translate-x-14 -translate-y-23"
           ></Image>
 
           <Image
@@ -147,7 +138,7 @@ export default function Book() {
             fill
             priority
             draggable={false}
-            className="object-contain scale-65 rotate-10  translate-x-14 -translate-y-20 "
+            className="object-contain scale-65 rotate-10 translate-x-14 -translate-y-20"
           ></Image>
 
           <Image
@@ -156,13 +147,13 @@ export default function Book() {
             fill
             priority
             draggable={false}
-            className="object-contain scale-45   translate-x-10 translate-y-15 "
+            className="object-contain scale-45 translate-x-10 translate-y-15"
           ></Image>
         </div>
 
-        {/* Page 2 */}
+        {/* Page 2 - Cream color hata diya */}
         <div
-          className="relative overflow-hidden book-page bg-amber-50 text-black"
+          className="relative overflow-hidden book-page bg-transparent text-black"
           style={{ width: 600, height: 500 }}
         >
           <Image
@@ -171,7 +162,7 @@ export default function Book() {
             fill
             priority
             draggable={false}
-            className="object-contain  pointer-events-none select-none"
+            className="object-contain pointer-events-none select-none"
           ></Image>
 
           <Image
@@ -180,7 +171,7 @@ export default function Book() {
             fill
             priority
             draggable={false}
-            className="object-contain rotate-90 shadow-black   translate-x-18 translate-y-38  scale-50   "
+            className="object-contain rotate-90 shadow-black translate-x-18 translate-y-38 scale-50"
           ></Image>
 
           <Image
@@ -189,7 +180,7 @@ export default function Book() {
             fill
             priority
             draggable={false}
-            className="object-contain shadow-black  -rotate-50 -translate-x-17 translate-y-30  scale-50   "
+            className="object-contain shadow-black -rotate-50 -translate-x-17 translate-y-30 scale-50"
           ></Image>
 
           <Image
@@ -198,7 +189,7 @@ export default function Book() {
             fill
             priority
             draggable={false}
-            className="object-contain shadow-black rotate-20  translate-x-19 -translate-y-22  scale-22   "
+            className="object-contain shadow-black rotate-20 translate-x-19 -translate-y-22 scale-22"
           ></Image>
 
           <Image
@@ -207,7 +198,7 @@ export default function Book() {
             fill
             priority
             draggable={false}
-            className="object-contain shadow-black rotate-20  translate-x-26 -translate-y-43  scale-22   "
+            className="object-contain shadow-black rotate-20 translate-x-26 -translate-y-43 scale-22"
           ></Image>
 
           <Image
@@ -216,7 +207,7 @@ export default function Book() {
             fill
             priority
             draggable={false}
-            className="object-contain shadow-black rotate-20  translate-x-11 translate-y-1  scale-22   "
+            className="object-contain shadow-black rotate-20 translate-x-11 translate-y-1 scale-22"
           ></Image>
 
           <Image
@@ -225,7 +216,7 @@ export default function Book() {
             fill
             priority
             draggable={false}
-            className="object-contain shadow-black rotate-12  translate-x-18 -translate-y-20  scale-80   "
+            className="object-contain shadow-black rotate-12 translate-x-18 -translate-y-20 scale-80"
           ></Image>
 
           <Image
@@ -234,7 +225,7 @@ export default function Book() {
             fill
             priority
             draggable={false}
-            className="object-contain shadow-black rotate-0 -translate-x-13 -translate-y-40  scale-60   "
+            className="object-contain shadow-black rotate-0 -translate-x-13 -translate-y-40 scale-60"
           ></Image>
 
           <Image
@@ -243,13 +234,13 @@ export default function Book() {
             fill
             priority
             draggable={false}
-            className="object-contain shadow-black rotate-0 -translate-x-13 -translate-y-16  scale-60   "
+            className="object-contain shadow-black rotate-0 -translate-x-13 -translate-y-16 scale-60"
           ></Image>
         </div>
 
-        {/* Page 3 */}
+        {/* Page 3 - Cream color hata diya */}
         <div
-          className="relative overflow-hidden book-page bg-amber-50 text-black"
+          className="relative overflow-hidden book-page bg-transparent text-black"
           style={{ width: 600, height: 500 }}
         >
           <Image
@@ -260,8 +251,6 @@ export default function Book() {
             draggable={false}
             className="object-contain pointer-events-none select-none"
           />
-
-          {/* Lyrics */}
           <Image
             src="/elements/billa6.png"
             alt="Lyrics"
@@ -270,8 +259,6 @@ export default function Book() {
             draggable={false}
             className="object-contain scale-55 rotate-1 -translate-x-30 -translate-y-10"
           />
-
-          {/* Wine */}
           <Image
             src="/elements/side1.png"
             alt="Wine"
@@ -280,8 +267,6 @@ export default function Book() {
             draggable={false}
             className="object-contain scale-50 rotate-180 -translate-x-26 translate-y-31"
           />
-
-          {/* Tape */}
           <Image
             src="/elements/starem.png"
             alt="Tape"
@@ -290,7 +275,6 @@ export default function Book() {
             draggable={false}
             className="object-contain scale-16 -rotate-18 translate-x-18 -translate-y-56 z-20"
           />
-
           <Image
             src="/ref/girl4.jpg"
             alt="Frame"
@@ -299,8 +283,6 @@ export default function Book() {
             draggable={false}
             className="object-contain scale-33 rotate-17 translate-x-13 -translate-y-21 z-30"
           />
-
-          {/* Photo Frame (Main Focus) */}
           <Image
             src="/elements/frame11.png"
             alt="Frame"
@@ -309,8 +291,6 @@ export default function Book() {
             draggable={false}
             className="object-contain scale-75 rotate-18 translate-x-10 -translate-y-11 z-30"
           />
-
-          {/* Recorder */}
           <Image
             src="/elements/moon.png"
             alt="Recorder"
@@ -319,7 +299,6 @@ export default function Book() {
             draggable={false}
             className="object-contain scale-34 -rotate-14 -translate-x-20 translate-y-30 z-40"
           />
-
           <Image
             src="/elements/fits.png"
             alt="Recorder"
@@ -328,18 +307,14 @@ export default function Book() {
             draggable={false}
             className="object-contain scale-44 -rotate-14 -translate-x-30 -translate-y-50 z-40"
           />
-
-          {/* Vinyl Disk */}
           <Image
             src="/elements/note1.png"
             alt="Disk"
             fill
             priority
             draggable={false}
-            className="object-contain scale-68 -rotate-7 z-50 translate-x-14 translate-y-38 "
+            className="object-contain scale-68 -rotate-7 z-50 translate-x-14 translate-y-38"
           />
-
-          {/* Old Paper */}
           <Image
             src="/elements/lovetape.png"
             alt="Old Paper"
@@ -350,9 +325,9 @@ export default function Book() {
           />
         </div>
 
-        {/* Page 4 */}
+        {/* Page 4 - Cream color hata diya */}
         <div
-          className="relative overflow-hidden book-page bg-amber-50 text-black"
+          className="relative overflow-hidden book-page bg-transparent text-black"
           style={{ width: 600, height: 500 }}
         >
           <Image
@@ -363,74 +338,67 @@ export default function Book() {
             draggable={false}
             className="object-contain pointer-events-none select-none"
           />
-
           <Image
             src="/elements/side2.png"
             alt="Disk"
             fill
             priority
             draggable={false}
-            className="object-contain scale-68  rotate-0 z-50 translate-x-16 translate-y-23 "
+            className="object-contain scale-68 rotate-0 z-50 translate-x-16 translate-y-23"
           />
-
           <Image
             src="/elements/billa.png"
             alt="Disk"
             fill
             priority
             draggable={false}
-            className="object-contain scale-38  rotate-0 z-50 -translate-x-14 -translate-y-28 "
+            className="object-contain scale-38 rotate-0 z-50 -translate-x-14 -translate-y-28"
           />
-
           <Image
             src="/elements/boqey.png"
             alt="Disk"
             fill
             priority
             draggable={false}
-            className="object-contain scale-48  rotate-0 z-50 -translate-x-14 translate-y-28 "
+            className="object-contain scale-48 rotate-0 z-50 -translate-x-14 translate-y-28"
           />
-
           <Image
             src="/ref/girl5.jpg"
             alt="Disk"
             fill
             priority
             draggable={false}
-            className="object-contain scale-32  rotate-0 z-50 translate-x-19 -translate-y-32 "
+            className="object-contain scale-32 rotate-0 z-50 translate-x-19 -translate-y-32"
           />
-
           <Image
             src="/ref/girl1.jpg"
             alt="Disk"
             fill
             priority
             draggable={false}
-            className="object-contain scale-68  rotate-0 z-50 translate-x-18 -translate-y-28 "
+            className="object-contain scale-68 rotate-0 z-50 translate-x-18 -translate-y-28"
           />
-
           <Image
             src="/frames/frame5.png"
             alt="Disk"
             fill
             priority
             draggable={false}
-            className="object-contain scale-68  rotate-0 z-50 translate-x-18 -translate-y-28 "
+            className="object-contain scale-68 rotate-0 z-50 translate-x-18 -translate-y-28"
           />
-
           <Image
             src="/elements/miss.png"
             alt="Disk"
             fill
             priority
             draggable={false}
-            className="object-contain scale-48  rotate-18 z-50 translate-x-28 translate-y-4 "
+            className="object-contain scale-48 rotate-18 z-50 translate-x-28 translate-y-4"
           />
         </div>
 
-        {/* Page 5 */}
+        {/* Page 5 - Cream color hata diya */}
         <div
-          className="relative overflow-hidden book-page bg-amber-50 text-black"
+          className="relative overflow-hidden book-page bg-transparent text-black"
           style={{ width: 600, height: 500 }}
         >
           <Image
@@ -441,92 +409,83 @@ export default function Book() {
             draggable={false}
             className="object-contain pointer-events-none select-none"
           />
-
           <Image
             src="/elements/side4.png"
             alt="Disk"
             fill
             priority
             draggable={false}
-            className="object-contain scale-68  rotate-0 z-50 -translate-x-22 translate-y-23 "
+            className="object-contain scale-68 rotate-0 z-50 -translate-x-22 translate-y-23"
           />
-
           <Image
             src="/elements/disk.png"
             alt="Disk"
             fill
             priority
             draggable={false}
-            className="object-contain scale-68  rotate-0 z-50 -translate-x-50 -translate-y-15 "
+            className="object-contain scale-68 rotate-0 z-50 -translate-x-50 -translate-y-15"
           />
-
           <Image
             src="/elements/disk.png"
             alt="Disk"
             fill
             priority
             draggable={false}
-            className="object-contain scale-68  rotate-0 z-50 -translate-x-50 -translate-y-15 "
+            className="object-contain scale-68 rotate-0 z-50 -translate-x-50 -translate-y-15"
           />
-
           <Image
             src="/elements/billa5.png"
             alt="Disk"
             fill
             priority
             draggable={false}
-            className="object-contain scale-68  rotate-0 z-50 translate-x-19 translate-y-33 "
+            className="object-contain scale-68 rotate-0 z-50 translate-x-19 translate-y-33"
           />
-
           <Image
             src="/ref/girl11.jpg"
             alt="Disk"
             fill
             priority
             draggable={false}
-            className="object-contain scale-26  -rotate-11 z-50 translate-x-4 -translate-y-12 "
+            className="object-contain scale-26 -rotate-11 z-50 translate-x-4 -translate-y-12"
           />
-
           <Image
             src="/ref/girl10.jpg"
             alt="Disk"
             fill
             priority
             draggable={false}
-            className="object-contain scale-26  rotate-11 z-50 translate-x-16 -translate-y-40 "
+            className="object-contain scale-26 rotate-11 z-50 translate-x-16 -translate-y-40"
           />
-
           <Image
             src="/elements/frame8.png"
             alt="Disk"
             fill
             priority
             draggable={false}
-            className="object-contain scale-68  rotate-0 z-50 translate-x-10 -translate-y-25 "
+            className="object-contain scale-68 rotate-0 z-50 translate-x-10 -translate-y-25"
           />
-
           <Image
             src="/elements/twoStar.png"
             alt="Disk"
             fill
             priority
             draggable={false}
-            className="object-contain scale-38  rotate-0 z-50 -translate-x-14 translate-y-20 "
+            className="object-contain scale-38 rotate-0 z-50 -translate-x-14 translate-y-20"
           />
-
           <Image
             src="/elements/text3.png"
             alt="Disk"
             fill
             priority
             draggable={false}
-            className="object-contain scale-48  rotate-0 z-50 -translate-x-22 -translate-y-48 "
+            className="object-contain scale-48 rotate-0 z-50 -translate-x-22 -translate-y-48"
           />
         </div>
 
-        {/* Page 6 */}
+        {/* Page 6 - Cream color hata diya */}
         <div
-          className="relative overflow-hidden book-page bg-amber-50 text-black"
+          className="relative overflow-hidden book-page bg-transparent text-black"
           style={{ width: 600, height: 500 }}
         >
           <Image
@@ -537,70 +496,63 @@ export default function Book() {
             draggable={false}
             className="object-contain pointer-events-none select-none"
           />
-
           <Image
             src="/elements/side5.png"
             alt="Disk"
             fill
             priority
             draggable={false}
-            className="object-contain scale-78  rotate-0 z-50 translate-x-22 translate-y-14 "
+            className="object-contain scale-78 rotate-0 z-50 translate-x-22 translate-y-14"
           />
-
           <Image
             src="/elements/text4.png"
             alt="Disk"
             fill
             priority
             draggable={false}
-            className="object-contain scale-58  rotate-0 z-50 -translate-x-6 -translate-y-40 "
+            className="object-contain scale-58 rotate-0 z-50 -translate-x-6 -translate-y-40"
           />
-
           <Image
             src="/ref/girl9.jpg"
             alt="Disk"
             fill
             priority
             draggable={false}
-            className="object-contain scale-28  -rotate-4 z-50 -translate-x-18 -translate-y-16 "
+            className="object-contain scale-28 -rotate-4 z-50 -translate-x-18 -translate-y-16"
           />
-          
           <Image
             src="/ref/girl8.jpg"
             alt="Disk"
             fill
             priority
             draggable={false}
-            className="object-contain scale-27  rotate-10 z-50 -translate-x-11 translate-y-13 "
+            className="object-contain scale-27 rotate-10 z-50 -translate-x-11 translate-y-13"
           />
-
           <Image
             src="/elements/frame7.png"
             alt="Disk"
             fill
             priority
             draggable={false}
-            className="object-contain scale-68  rotate-0 z-50 -translate-x-14 translate-y-1 "
+            className="object-contain scale-68 rotate-0 z-50 -translate-x-14 translate-y-1"
           />
-
           <Image
             src="/elements/billa4.png"
             alt="Disk"
             fill
             priority
             draggable={false}
-            className="object-contain scale-58  rotate-0 z-50 -translate-x-17 translate-y-40 "
+            className="object-contain scale-58 rotate-0 z-50 -translate-x-17 translate-y-40"
           />
         </div>
 
-        {/* Back Cover */}
+        {/* Back Cover - Blue color hata diya */}
         <div
-          className="relative overflow-hidden book-page bg-blue-700 text-white"
+          className="relative overflow-hidden book-page bg-transparent text-white"
           data-density="hard"
           style={{ width: 600, height: 500 }}
         >
           <Image
-            // src="/frontr.png"
             src="/pages/back.png"
             alt="Front Cover"
             fill
