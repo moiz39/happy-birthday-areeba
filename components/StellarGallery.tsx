@@ -2,7 +2,7 @@
 
 import React, { Suspense, useEffect, useMemo, useRef, useState, createContext, useContext } from "react"
 import * as THREE from "three"
-import { Canvas, useFrame } from "@react-three/fiber"
+import { Canvas, useFrame, useThree } from "@react-three/fiber"
 import {
   OrbitControls,
   Environment,
@@ -85,8 +85,6 @@ function StarfieldBackground() {
   useEffect(() => {
     if (!mountRef.current) return
 
-    // Check WebGL availability BEFORE creating Three.js renderer
-    // to avoid THREE's internal console.error on sandboxed/no-GPU environments
     const testCanvas = document.createElement("canvas")
     const gl = testCanvas.getContext("webgl") || testCanvas.getContext("experimental-webgl")
     if (!gl) {
@@ -149,7 +147,6 @@ function StarfieldBackground() {
         starsMaterial?.dispose()
       }
     } catch (e) {
-      // WebGL not available — CSS fallback handles the background
       console.warn("WebGL not available, using CSS fallback:", e)
     }
   }, [])
@@ -173,9 +170,19 @@ function FloatingCard({
   const [hovered, setHovered] = useState(false)
   const { setSelectedCard } = useCard()
 
-  useFrame(({ camera }) => {
+  useFrame(({ camera, clock }) => {
     if (groupRef.current) {
       groupRef.current.lookAt(camera.position)
+      
+      // NAYA: Floating animation (Hover par tez, normal par slow)
+      const time = clock.getElapsedTime()
+      const hoverMultiplier = hovered ? 2.5 : 1 // Hover par zyada move karega
+      
+      const floatY = Math.sin(time * 1.5 + parseFloat(card.id)) * 0.15 * hoverMultiplier
+      const floatX = Math.cos(time * 1.2 + parseFloat(card.id)) * 0.1 * hoverMultiplier
+      
+      groupRef.current.position.x = position.x + floatX
+      groupRef.current.position.y = position.y + floatY
     }
   })
 
@@ -212,7 +219,7 @@ function FloatingCard({
         position={[0, 0, 0.01]}
         style={{
           transition: "all 0.3s ease",
-          transform: hovered ? "scale(1.15)" : "scale(1)",
+          transform: hovered ? "scale(1.15) rotateZ(5deg)" : "scale(1)",
           pointerEvents: "none",
         }}
       >
@@ -343,6 +350,8 @@ function CardModal() {
 
 function CardGalaxy() {
   const { cards } = useCard()
+  const groupRef = useRef<THREE.Group>(null)
+  const { pointer } = useThree() // NAYA: Mouse position track karne ke liye
 
   const cardPositions = useMemo(() => {
     const positions: {
@@ -376,8 +385,16 @@ function CardGalaxy() {
     return positions
   }, [cards.length])
 
+  // NAYA: Mouse move par poora galaxy halka sa ghoomega
+  useFrame(() => {
+    if (groupRef.current) {
+      groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, pointer.x * 0.5, 0.05)
+      groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, -pointer.y * 0.5, 0.05)
+    }
+  })
+
   return (
-    <>
+    <group ref={groupRef}>
       <Sphere args={[2, 32, 32]} position={[0, 0, 0]}>
         <meshStandardMaterial color="#1a1a2e" transparent opacity={0.15} wireframe />
       </Sphere>
@@ -394,7 +411,7 @@ function CardGalaxy() {
       {cards.map((card, i) => (
         <FloatingCard key={card.id} card={card} position={cardPositions[i]} />
       ))}
-    </>
+    </group>
   )
 }
 
@@ -428,7 +445,6 @@ export default function StellarCardGallerySingle() {
   const [webglAvailable, setWebglAvailable] = useState(false)
 
   useEffect(() => {
-    // Detect WebGL support once on mount before rendering anything Three.js related
     const testCanvas = document.createElement("canvas")
     const gl = testCanvas.getContext("webgl") || testCanvas.getContext("experimental-webgl")
     setWebglAvailable(!!gl)
