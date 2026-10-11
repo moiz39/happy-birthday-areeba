@@ -12,7 +12,7 @@ export default function Book() {
     if (!bookRef.current || !containerRef.current) return;
 
     const pageFlip = new PageFlip(bookRef.current, {
-      width: 1200, // Dono pages ki total width (600 + 600)
+      width: 600, // Yahan 400 se 600 kar diya taake gap khatam ho jaye
       height: 500,
       autoSize: false,
       showCover: true,
@@ -22,7 +22,7 @@ export default function Book() {
       startPage: 0,
       clickEventForward: false,
       clickEventBackward: false,
-    } as any);
+    });
 
     pageFlip.loadFromHTML(bookRef.current.querySelectorAll(".book-page"));
 
@@ -55,12 +55,12 @@ export default function Book() {
   return (
     <div ref={containerRef} className="w-full h-full flex items-center justify-center">
       
-      <div ref={bookRef} style={{ margin: 0, padding: 0 }}>
-        {/* Front Cover */}
+      <div ref={bookRef}>
+        {/* Front Cover - Blue color hata diya */}
         <div
           className="book-page bg-transparent text-white"
           data-density="hard"
-          style={{ width: 600, height: 500, margin: 0, padding: 0 }}
+          style={{ width: 600, height: 500 }}
         >
           <Image
             src="/pages/front.png"
@@ -73,10 +73,10 @@ export default function Book() {
           <div className="flex h-full items-center justify-center text-5xl font-bold"></div>
         </div>
 
-        {/* Page 1 */}
+        {/* Page 1 - Cream color hata diya */}
         <div
           className="book-page bg-transparent text-black"
-          style={{ width: 600, height: 500, margin: 0, padding: 0 }}
+          style={{ width: 600, height: 500 }}
         >
           <Image
             src="/pages/left.jpg"
@@ -86,6 +86,7 @@ export default function Book() {
             draggable={false}
             className="object-contain pointer-events-none select-none"
           ></Image>
+
           <Image
             src="/elements/fwine.png"
             alt="Front Cover"
@@ -94,6 +95,7 @@ export default function Book() {
             draggable={false}
             className="object-contain -rotate-12 -translate-x-34 -translate-y-33 scale-35"
           ></Image>
+
           <Image
             src="/elements/side3.png"
             alt="Front Cover"
@@ -102,6 +104,7 @@ export default function Book() {
             draggable={false}
             className="object-contain -translate-x-23 -translate-y-14 scale-78"
           ></Image>
+
           <Image
             src="/elements/mouse.png"
             alt="Front Cover"
@@ -110,6 +113,7 @@ export default function Book() {
             draggable={false}
             className="object-contain z-50 translate-x-20 translate-y-46 scale-55"
           ></Image>
+
           <Image
             src="/elements/butter.png"
             alt="Front Cover"
@@ -118,6 +122,7 @@ export default function Book() {
             draggable={false}
             className="object-contain scale-45 rotate-30 -translate-x-28 translate-y-32"
           ></Image>
+
           <Image
             src="/ref/girl.jpg"
             alt="Front Cover"
@@ -126,6 +131,7 @@ export default function Book() {
             draggable={false}
             className="object-contain scale-33 rotate-10 translate-x-14 -translate-y-23"
           ></Image>
+
           <Image
             src="/elements/frame10.png"
             alt="Front Cover"
@@ -134,6 +140,7 @@ export default function Book() {
             draggable={false}
             className="object-contain scale-65 rotate-10 translate-x-14 -translate-y-20"
           ></Image>
+
           <Image
             src="/elements/text1.png"
             alt="Front Cover"
@@ -144,10 +151,10 @@ export default function Book() {
           ></Image>
         </div>
 
-        {/* Page 2 */}
+        {/* Page 2 - Cream color hata diya */}
         <div
           className="relative overflow-hidden book-page bg-transparent text-black"
-          style={{ width: 600, height: 500, margin: 0, padding: 0 }}
+          style={{ width: 600, height: 500 }}
         >
           <Image
             src="/pages/right.jpg"
@@ -157,6 +164,7 @@ export default function Book() {
             draggable={false}
             className="object-contain pointer-events-none select-none"
           ></Image>
+
           <Image
             src="/elements/paper.png"
             alt="Front Cover"
@@ -165,6 +173,7 @@ export default function Book() {
             draggable={false}
             className="object-contain rotate-90 shadow-black translate-x-18 translate-y-38 scale-50"
           ></Image>
+
           <Image
             src="/elements/starB.png"
             alt="Front Cover"
@@ -173,6 +182,7 @@ export default function Book() {
             draggable={false}
             className="object-contain shadow-black -rotate-50 -translate-x-17 translate-y-30 scale-50"
           ></Image>
+
           <Image
             src="/ref/girl.jpg"
             alt="Front Cover"
@@ -181,6 +191,7 @@ export default function Book() {
             draggable={false}
             className="object-contain shadow-black rotate-20 translate-x-19 -translate-y-22 scale-22"
           ></Image>
+
           <Image
             src="/ref/girl2.jpg"
             alt="Front Cover"
@@ -189,6 +200,7 @@ export default function Book() {
             draggable={false}
             className="object-contain shadow-black rotate-20 translate-x-26 -translate-y-43 scale-22"
           ></Image>
+
           <Image
             src="/ref/girl3.jpg"
             alt="Front Cover"
@@ -197,6 +209,7 @@ export default function Book() {
             draggable={false}
             className="object-contain shadow-black rotate-20 translate-x-11 translate-y-1 scale-22"
           ></Image>
+
           <Image
             src="/elements/frame9.png"
             alt="Front Cover"
@@ -205,6 +218,7 @@ export default function Book() {
             draggable={false}
             className="object-contain shadow-black rotate-12 translate-x-18 -translate-y-20 scale-80"
           ></Image>
+
           <Image
             src="/elements/text2.png"
             alt="Front Cover"
@@ -213,6 +227,7 @@ export default function Book() {
             draggable={false}
             className="object-contain shadow-black rotate-0 -translate-x-13 -translate-y-40 scale-60"
           ></Image>
+
           <Image
             src="/elements/kit.png"
             alt="Front Cover"
@@ -223,10 +238,10 @@ export default function Book() {
           ></Image>
         </div>
 
-        {/* Page 3 */}
+        {/* Page 3 - Cream color hata diya */}
         <div
           className="relative overflow-hidden book-page bg-transparent text-black"
-          style={{ width: 600, height: 500, margin: 0, padding: 0 }}
+          style={{ width: 600, height: 500 }}
         >
           <Image
             src="/pages/left.jpg"
@@ -310,10 +325,10 @@ export default function Book() {
           />
         </div>
 
-        {/* Page 4 */}
+        {/* Page 4 - Cream color hata diya */}
         <div
           className="relative overflow-hidden book-page bg-transparent text-black"
-          style={{ width: 600, height: 500, margin: 0, padding: 0 }}
+          style={{ width: 600, height: 500 }}
         >
           <Image
             src="/pages/right.jpg"
@@ -381,10 +396,10 @@ export default function Book() {
           />
         </div>
 
-        {/* Page 5 */}
+        {/* Page 5 - Cream color hata diya */}
         <div
           className="relative overflow-hidden book-page bg-transparent text-black"
-          style={{ width: 600, height: 500, margin: 0, padding: 0 }}
+          style={{ width: 600, height: 500 }}
         >
           <Image
             src="/pages/left.jpg"
@@ -468,10 +483,10 @@ export default function Book() {
           />
         </div>
 
-        {/* Page 6 */}
+        {/* Page 6 - Cream color hata diya */}
         <div
           className="relative overflow-hidden book-page bg-transparent text-black"
-          style={{ width: 600, height: 500, margin: 0, padding: 0 }}
+          style={{ width: 600, height: 500 }}
         >
           <Image
             src="/pages/right.jpg"
@@ -531,11 +546,11 @@ export default function Book() {
           />
         </div>
 
-        {/* Back Cover */}
+        {/* Back Cover - Blue color hata diya */}
         <div
           className="relative overflow-hidden book-page bg-transparent text-white"
           data-density="hard"
-          style={{ width: 600, height: 500, margin: 0, padding: 0 }}
+          style={{ width: 600, height: 500 }}
         >
           <Image
             src="/pages/back.png"
