@@ -100,7 +100,7 @@ export const HeroSection = () => {
       <div className="mt-auto flex items-center justify-between px-8 pb-8 sm:px-14">
         <div className="h-px flex-1 bg-[#14140F]/10" />
         <span className="hero-mono px-4 text-[10px] uppercase tracking-[0.25em] text-[#8A8A80]">
-          Made for you
+          Bundle Of Love ❤️
         </span>
       </div>
     </section>
