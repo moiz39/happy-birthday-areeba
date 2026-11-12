@@ -56,7 +56,7 @@ export const HeroSection = () => {
         </h1>
         <div className="mt-6 h-px w-16 bg-[#9C7A3F]" />
         <p className="hero-body mt-6 max-w-sm text-base leading-relaxed text-[#4A4A42]">
-         May this year bring you closer to everything you're chasing.
+         Duniya ki sab se khoobsurat larki ko Happy Birthday! ❤️✨ May Allah bless you with endless happiness and success in both Duniya and Akhirah. May every passing year make your personality even more beautiful, mature, and inspiring. Stay blessed always! 🥰🌸
         </p>
       </div>
 
