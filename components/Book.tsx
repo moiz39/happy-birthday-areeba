@@ -9,7 +9,7 @@ export default function Book() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!bookRef.current || !containerRef.current) return;
+    if (!bookRef.current || !containerRef.current) return; 
 
     const pageFlip = new PageFlip(bookRef.current, {
       width: 600, // Yahan 400 se 600 kar diya taake gap khatam ho jaye
